@@ -11,97 +11,105 @@
       </v-row>
     </v-card-title>
 
-    <v-card-text v-show="showContent" class="pt-3">
-      <v-row>
-        <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
-          <span class="font-weight-bold">Description:</span>
-        </v-col>
-        <v-col
-          cols="11"
-          offset="1"
-          sm="7"
-          offset-sm="0"
-          md="4"
-          class="pt-0 pt-sm-3"
-        >
-          {{ sysinfo.description === undefined ? 'N/A' : sysinfo.description }}
-        </v-col>
+    <v-slide-y-transition>
+      <v-card-text v-show="showContent" class="pt-3">
+        <v-row>
+          <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
+            <span class="font-weight-bold">Description:</span>
+          </v-col>
+          <v-col
+            cols="11"
+            offset="1"
+            sm="7"
+            offset-sm="0"
+            md="4"
+            class="pt-0 pt-sm-3"
+          >
+            {{
+              sysinfo.description === undefined ? 'N/A' : sysinfo.description
+            }}
+          </v-col>
 
-        <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
-          <span class="font-weight-bold">Node Date/time:</span>
-        </v-col>
-        <v-col
-          cols="11"
-          offset="1"
-          sm="7"
-          offset-sm="0"
-          md="4"
-          class="pt-0 pt-sm-3"
-        >
-          {{ sysinfo.date }} {{ sysinfo.time }}
-        </v-col>
+          <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
+            <span class="font-weight-bold">Node Date/time:</span>
+          </v-col>
+          <v-col
+            cols="11"
+            offset="1"
+            sm="7"
+            offset-sm="0"
+            md="4"
+            class="pt-0 pt-sm-3"
+          >
+            {{ sysinfo.date }} {{ sysinfo.time }}
+          </v-col>
 
-        <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
-          <span class="font-weight-bold">Model:</span>
-        </v-col>
-        <v-col
-          cols="11"
-          offset="1"
-          sm="7"
-          offset-sm="0"
-          md="4"
-          class="pt-0 pt-sm-3"
-        >
-          {{ sysinfo.model === undefined ? 'N/A' : sysinfo.model }}
-        </v-col>
+          <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
+            <span class="font-weight-bold">Model:</span>
+          </v-col>
+          <v-col
+            cols="11"
+            offset="1"
+            sm="7"
+            offset-sm="0"
+            md="4"
+            class="pt-0 pt-sm-3"
+          >
+            {{ sysinfo.model === undefined ? 'N/A' : sysinfo.model }}
+          </v-col>
 
-        <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
-          <span class="font-weight-bold">Target Type:</span>
-        </v-col>
-        <v-col
-          cols="11"
-          offset="1"
-          sm="7"
-          offset-sm="0"
-          md="4"
-          class="pt-0 pt-sm-3"
-        >
-          {{ sysinfo.target_type === undefined ? 'N/A' : sysinfo.target_type }}
-        </v-col>
+          <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
+            <span class="font-weight-bold">Target Type:</span>
+          </v-col>
+          <v-col
+            cols="11"
+            offset="1"
+            sm="7"
+            offset-sm="0"
+            md="4"
+            class="pt-0 pt-sm-3"
+          >
+            {{
+              sysinfo.target_type === undefined ? 'N/A' : sysinfo.target_type
+            }}
+          </v-col>
 
-        <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
-          <span class="font-weight-bold">Firmware Version:</span>
-        </v-col>
-        <v-col
-          cols="11"
-          offset="1"
-          sm="7"
-          offset-sm="0"
-          md="4"
-          class="pt-0 pt-sm-3"
-        >
-          {{
-            sysinfo.firmware_version === undefined
-              ? 'N/A'
-              : sysinfo.firmware_version
-          }}
-        </v-col>
+          <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
+            <span class="font-weight-bold">Firmware Version:</span>
+          </v-col>
+          <v-col
+            cols="11"
+            offset="1"
+            sm="7"
+            offset-sm="0"
+            md="4"
+            class="pt-0 pt-sm-3"
+          >
+            {{
+              sysinfo.firmware_version === undefined
+                ? 'N/A'
+                : sysinfo.firmware_version
+            }}
+          </v-col>
 
-        <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
-          <span class="font-weight-bold">API Version:</span>
-        </v-col>
-        <v-col
-          cols="11"
-          offset="1"
-          sm="7"
-          offset-sm="0"
-          md="4"
-          class="pt-0 pt-sm-3"
-        >
-          {{ sysinfo.api_version === undefined ? 'N/A' : sysinfo.api_version }}
-        </v-col>
-      </v-row>
-    </v-card-text>
+          <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
+            <span class="font-weight-bold">API Version:</span>
+          </v-col>
+          <v-col
+            cols="11"
+            offset="1"
+            sm="7"
+            offset-sm="0"
+            md="4"
+            class="pt-0 pt-sm-3"
+          >
+            {{
+              sysinfo.api_version === undefined ? 'N/A' : sysinfo.api_version
+            }}
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-slide-y-transition>
   </v-card>
 </template>
 
