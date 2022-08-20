@@ -1,41 +1,104 @@
 <template>
-  <v-card height="100%">
-    <v-card-title class="headline">
-      System
-      <v-spacer />
-      <v-icon color="blue">mdi-information</v-icon>
-    </v-card-title>
-    <v-card-text>
+  <v-card outlined height="100%">
+    <v-card-title @click="toggleContent" class="primary">
       <v-row>
-        <v-col class="text-end" cols="4">
-          <p class="label">Model:</p>
-          <p class="label">Target Type:</p>
-          <p class="label">Firmware Version:</p>
-          <p class="label">API Version:</p>
-          <p class="label">Node Date/time:</p>
-          <p class="label">Description:</p>
+        <v-col cols="10" class="white--text">System</v-col>
+        <v-col cols="2" align="right">
+          <v-icon @click.stop="openSettings" class="white--text">
+            mdi-cog
+          </v-icon>
         </v-col>
-        <v-col cols="8">
-          <p class="mb-0">
-            {{ sysinfo.model === undefined ? 'N/A' : sysinfo.model }}
-          </p>
-          <p class="mb-0">
-            {{ sysinfo.target_type === undefined ? 'N/A' : sysinfo.target_type }}
-          </p>
-          <p class="mb-0">
-            {{
-              sysinfo.firmware_version === undefined
-                ? 'N/A'
-                : sysinfo.firmware_version
-            }}
-          </p>
-          <p class="mb-0">
-            {{ sysinfo.api_version === undefined ? 'N/A' : sysinfo.api_version }}
-          </p>
-          <p class="mb-0">{{ sysinfo.date }} {{ sysinfo.time }}</p>
-          <p class="mb-0">
-            {{ sysinfo.description === undefined ? 'N/A' : sysinfo.description }}
-          </p>
+      </v-row>
+    </v-card-title>
+
+    <v-card-text v-show="showContent" class="pt-3">
+      <v-row>
+        <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
+          <span class="font-weight-bold">Description:</span>
+        </v-col>
+        <v-col
+          cols="11"
+          offset="1"
+          sm="7"
+          offset-sm="0"
+          md="4"
+          class="pt-0 pt-sm-3"
+        >
+          {{ sysinfo.description === undefined ? 'N/A' : sysinfo.description }}
+        </v-col>
+
+        <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
+          <span class="font-weight-bold">Node Date/time:</span>
+        </v-col>
+        <v-col
+          cols="11"
+          offset="1"
+          sm="7"
+          offset-sm="0"
+          md="4"
+          class="pt-0 pt-sm-3"
+        >
+          {{ sysinfo.date }} {{ sysinfo.time }}
+        </v-col>
+
+        <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
+          <span class="font-weight-bold">Model:</span>
+        </v-col>
+        <v-col
+          cols="11"
+          offset="1"
+          sm="7"
+          offset-sm="0"
+          md="4"
+          class="pt-0 pt-sm-3"
+        >
+          {{ sysinfo.model === undefined ? 'N/A' : sysinfo.model }}
+        </v-col>
+
+        <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
+          <span class="font-weight-bold">Target Type:</span>
+        </v-col>
+        <v-col
+          cols="11"
+          offset="1"
+          sm="7"
+          offset-sm="0"
+          md="4"
+          class="pt-0 pt-sm-3"
+        >
+          {{ sysinfo.target_type === undefined ? 'N/A' : sysinfo.target_type }}
+        </v-col>
+
+        <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
+          <span class="font-weight-bold">Firmware Version:</span>
+        </v-col>
+        <v-col
+          cols="11"
+          offset="1"
+          sm="7"
+          offset-sm="0"
+          md="4"
+          class="pt-0 pt-sm-3"
+        >
+          {{
+            sysinfo.firmware_version === undefined
+              ? 'N/A'
+              : sysinfo.firmware_version
+          }}
+        </v-col>
+
+        <v-col cols="12" sm="3" md="2" class="pb-0 pb-sm-3">
+          <span class="font-weight-bold">API Version:</span>
+        </v-col>
+        <v-col
+          cols="11"
+          offset="1"
+          sm="7"
+          offset-sm="0"
+          md="4"
+          class="pt-0 pt-sm-3"
+        >
+          {{ sysinfo.api_version === undefined ? 'N/A' : sysinfo.api_version }}
         </v-col>
       </v-row>
     </v-card-text>
@@ -47,16 +110,21 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'SystemInfo',
-  methods: {},
+  data() {
+    return {
+      showContent: true,
+    }
+  },
+  methods: {
+    toggleContent() {
+      this.showContent = !this.showContent
+    },
+    openSettings() {
+      $nuxt.$emit('show-system-setup')
+    },
+  },
   computed: {
     ...mapGetters(['sysinfo']),
   },
 }
 </script>
-
-<style lang="css" scoped>
-.label {
-  margin-bottom: 0;
-  font-weight: bold;
-}
-</style>

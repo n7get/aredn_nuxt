@@ -345,8 +345,8 @@ export const actions = {
       commit('SET_ERROR', error)
     })
   },
-  expireResource({ commit }, resource) {
-    commit('EXPIRE_NODE_DATA', resource)
+  expireResources({ commit }, resources) {
+    commit('EXPIRE_NODE_DATA', resources)
   },
   async traceroute({ commit, getters }, node) {
     const qs = 'traceroute=' + node
@@ -376,15 +376,17 @@ export const mutations = {
   INIT_NODE_DATA(state) {
     state.nodeData = initNodeData()
   },
-  EXPIRE_NODE_DATA(state, resource) {
+  EXPIRE_NODE_DATA(state, resources) {
     const nodeData = state.nodeData
 
-    if (!nodeData.hasOwnProperty(resource)) {
-      throw 'unknown node data resource: ' + resource
-    }
+    resources.forEach(resource => {
+      if (!nodeData.hasOwnProperty(resource)) {
+        throw 'unknown node data resource: ' + resource
+      }
 
-    nodeData[resource].value = structuredClone(resourceList[resource].init)
-    nodeData[resource].loaded = false
+      nodeData[resource].value = structuredClone(resourceList[resource].init)
+      nodeData[resource].loaded = false
+    })
   },
   SET_API_MISMATCH(state, hasApiMismatch) {
     state.hasApiMismatch = hasApiMismatch

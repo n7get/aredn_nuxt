@@ -1,26 +1,31 @@
 <template>
-  <v-card height="100%">
-    <v-card-title class="headline">
-      Memory
-      <v-spacer />
-      <v-icon color="blue">mdi-memory</v-icon>
-    </v-card-title>
-    <v-card-text>
+  <v-card outlined height="100%">
+    <v-card-title class="primary white--text">Memory</v-card-title>
+
+    <v-card-text class="pt-3">
       <v-row>
-        <v-col class="text-end">
-          <p class="label">Total RAM:</p>
-          <p class="label">Free RAM:</p>
-          <p class="label">Shared RAM:</p>
-          <p class="label">Buffer RAM:</p>
+        <v-col cols="6">
+          <span class="font-weight-bold">Total RAM:</span>
         </v-col>
-        <v-col>
-          <p class="mb-0">{{ memory.totalram }} KB</p>
-          <p class="mb-0">
-            {{ memory.freeram }} KB <v-progress-linear v-model="freerampctfree" />
-          </p>
-          <p class="mb-0">{{ memory.sharedram }} KB</p>
-          <p class="mb-0">{{ memory.bufferram }} KB</p>
+        <v-col cols="6"> {{ memory.totalram }} KB </v-col>
+
+        <v-col cols="6">
+          <span class="font-weight-bold">Free RAM:</span>
         </v-col>
+        <v-col cols="6">
+          {{ memory.freeram }} KB
+          <v-progress-linear v-model="freerampctfree" />
+        </v-col>
+
+        <v-col cols="6">
+          <span class="font-weight-bold">Shared RAM:</span>
+        </v-col>
+        <v-col cols="6"> {{ memory.sharedram }} KB </v-col>
+
+        <v-col cols="6">
+          <span class="font-weight-bold">Buffer RAM:</span>
+        </v-col>
+        <v-col cols="6"> {{ memory.bufferram }} KB </v-col>
       </v-row>
     </v-card-text>
   </v-card>
@@ -39,10 +44,3 @@ export default {
   },
 }
 </script>
-
-<style lang="css" scoped>
-.label {
-  margin-bottom: 0;
-  font-weight: bold;
-}
-</style>

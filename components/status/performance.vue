@@ -1,28 +1,35 @@
 <template>
-  <v-card height="100%">
-    <v-card-title class="headline">
-      Performance
-      <v-spacer />
-      <v-icon color="amber">mdi-gauge</v-icon>
-    </v-card-title>
-    <v-card-text>
+  <v-card outlined height="100%">
+    <v-card-title class="primary white--text">Performance</v-card-title>
+
+    <v-card-text class="pt-3">
       <v-row>
-        <v-col class="text-end" cols="5">
-          <p class="label">Uptime:</p>
-          <p class="label">Load (1m):</p>
-          <p class="label">Load (5m):</p>
-          <p class="label">Load (15m):</p>
+        <v-col cols="6">
+          <span class="font-weight-bold">Uptime:</span>
         </v-col>
-        <v-col cols="7">
-          <!-- {{ sysinfo.loads[0] }} -->
-          <p class="mb-0">{{ sysinfo.uptime }}</p>
-          <p
-            v-for="(load, index) in sysinfo.loads"
-            :key="`load${index}`"
-            class="mb-0"
-          >
-            {{ load }}
-          </p>
+        <v-col cols="6">
+          {{ sysinfo.uptime }}
+        </v-col>
+
+        <v-col cols="6">
+          <span class="font-weight-bold">Load (1m):</span>
+        </v-col>
+        <v-col cols="6">
+          {{ sysinfo && sysinfo.loads ? sysinfo.loads[0] : 'N/A' }}
+        </v-col>
+
+        <v-col cols="6">
+          <span class="font-weight-bold">Load (5m):</span>
+        </v-col>
+        <v-col cols="6">
+          {{ sysinfo && sysinfo.loads ? sysinfo.loads[1] : 'N/A' }}
+        </v-col>
+
+        <v-col cols="6">
+          <span class="font-weight-bold">Load (15m):</span>
+        </v-col>
+        <v-col cols="6">
+          {{ sysinfo && sysinfo.loads ? sysinfo.loads[2] : 'N/A' }}
         </v-col>
       </v-row>
     </v-card-text>
@@ -31,6 +38,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import systeminfoVue from './systeminfo.vue'
 
 export default {
   name: 'Performance',
@@ -39,10 +47,3 @@ export default {
   },
 }
 </script>
-
-<style lang="css" scoped>
-.label {
-  margin-bottom: 0;
-  font-weight: bold;
-}
-</style>

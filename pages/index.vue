@@ -1,38 +1,26 @@
 <template>
   <div>
-    <!-- ROW 1 -->
-    <v-row justify="center" align="stretch">
-      <v-col cols="8">
+    <v-row>
+      <v-col cols="12">
         <status-systeminfo />
       </v-col>
-      <v-col cols="4">
-        <status-location />
-      </v-col>
     </v-row>
-    <!-- ROW 2 -->
-    <v-row justify="center" align="stretch">
-      <v-col cols="4">
-        <status-ipaddresses />
-      </v-col>
-      <v-col cols="4">
-        <status-meshrf />
-      </v-col>
-      <v-col cols="4">
-        <status-olsrinfo />
-      </v-col>
+    <v-row>
+      <v-col cols="12" sm="6"><status-ipaddresses /></v-col>
+      <v-col cols="12" sm="6"><status-meshrf /></v-col>
     </v-row>
-    <!-- ROW 3 -->
-    <v-row justify="center" align="stretch">
-      <v-col cols="4">
-        <status-filesysteminfo />
-      </v-col>
-      <v-col cols="4">
-        <status-memory />
-      </v-col>
-      <v-col cols="4">
-        <status-performance />
-      </v-col>
+    <v-row>
+      <v-col cols="12" sm="6"><status-location /></v-col>
+      <v-col cols="12" sm="6"><status-olsrinfo /></v-col>
     </v-row>
+    <v-row>
+      <v-col cols="12" sm="6" md="4"><status-filesysteminfo /></v-col>
+      <v-col cols="12" sm="6" md="4"><status-performance /></v-col>
+      <v-col cols="12" sm="6" md="4"><status-memory /></v-col>
+    </v-row>
+    <!-- <v-row>
+      <v-spacer></v-spacer>
+    </v-row> -->
   </div>
 </template>
 
@@ -47,13 +35,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['loadResources', 'pageResources']),
+    ...mapActions(['expireResources', 'loadResources', 'pageResources']),
   },
   computed: {
     ...mapGetters(['nodeName']),
   },
   created() {
-    this.pageResources([
+    const resources = [
       'ip',
       'meshrf',
       'location',
@@ -61,7 +49,14 @@ export default {
       'olsr',
       'storage',
       'memory',
-    ])
+    ]
+
+    this.$nuxt.$on('refresh-node', () => {
+      this.expireResources(resources)
+      this.loadResources()
+    })
+
+    this.pageResources(resources)
   },
   mounted() {
     this.loadResources()

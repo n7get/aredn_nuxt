@@ -1,31 +1,44 @@
 <template>
-  <v-card height="100%">
-    <v-card-title class="headline">
-      Mesh RF
-      <v-spacer />
-      <v-icon color="green">mdi-wifi</v-icon>
-    </v-card-title>
-    <v-card-text>
+  <v-card outlined height="100%">
+    <v-card-title class="primary">
       <v-row>
-        <v-col class="text-end">
-          <p class="label">SSID:</p>
-          <p class="label">Channel:</p>
-          <p class="label">Bandwidth (MHz):</p>
-          <p class="label">Frequency (MHz):</p>
+        <v-col cols="10" class="white--text">Mesh RF</v-col>
+        <v-col cols="2" align="right">
+          <v-icon @click.stop="openSettings" class="white--text">
+            mdi-cog
+          </v-icon>
         </v-col>
-        <v-col>
-          <p class="mb-0">
-            {{ meshrf.ssid === undefined ? 'Disabled' : meshrf.ssid }}
-          </p>
-          <p class="mb-0">
-            {{ meshrf.channel === undefined ? 'Disabled' : meshrf.channel }}
-          </p>
-          <p class="mb-0">
-            {{ meshrf.chanbw === undefined ? 'Disabled' : meshrf.chanbw }}
-          </p>
-          <p class="mb-0">
-            {{ meshrf.frequency === undefined ? 'Disabled' : meshrf.frequency }}
-          </p>
+      </v-row>
+    </v-card-title>
+
+    <v-card-text class="pt-3">
+      <v-row>
+        <v-col cols="6">
+          <span class="font-weight-bold">SSID:</span>
+        </v-col>
+        <v-col cols="6">
+          {{ meshrf.ssid === undefined ? 'Disabled' : meshrf.ssid }}
+        </v-col>
+
+        <v-col cols="6">
+          <span class="font-weight-bold">Channel:</span>
+        </v-col>
+        <v-col cols="6">
+          {{ meshrf.channel === undefined ? 'Disabled' : meshrf.channel }}
+        </v-col>
+
+        <v-col cols="6">
+          <span class="font-weight-bold">Bandwidth (MHz):</span>
+        </v-col>
+        <v-col cols="6">
+          {{ meshrf.chanbw === undefined ? 'Disabled' : meshrf.chanbw }}
+        </v-col>
+
+        <v-col cols="6">
+          <span class="font-weight-bold">Frequency (MHz):</span>
+        </v-col>
+        <v-col cols="6">
+          {{ meshrf.frequency === undefined ? 'Disabled' : meshrf.frequency }}
         </v-col>
       </v-row>
     </v-card-text>
@@ -37,15 +50,13 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'MeshRF',
+  methods: {
+    openSettings() {
+      $nuxt.$emit('show-mesh-setup')
+    },
+  },
   computed: {
     ...mapGetters(['meshrf']),
   },
 }
 </script>
-
-<style lang="css" scoped>
-.label {
-  margin-bottom: 0;
-  font-weight: bold;
-}
-</style>
