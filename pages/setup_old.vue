@@ -5,7 +5,7 @@
     </v-col>
   </v-row> -->
   <v-card>
-    <v-tabs v-model="tab" background-color="primary" centered dark icons-and-text>
+    <v-tabs v-model="tab" background-color="primary" centered icons-and-text>
       <v-tabs-slider></v-tabs-slider>
 
       <v-tab href="#tab-setup">

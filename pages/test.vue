@@ -7,13 +7,12 @@
       <v-btn
         class="mx-2"
         fab
-        dark
         small
         color="primary"
         @click="toggleAuthenticated()"
       >
-        <v-icon v-if="isAuthenticated()" dark> mdi-lock-open-variant </v-icon>
-        <v-icon v-else dark> mdi-lock </v-icon>
+        <v-icon v-if="isAuthenticated()"> mdi-lock-open-variant </v-icon>
+        <v-icon v-else> mdi-lock </v-icon>
       </v-btn>
       <p>user: {{ user }}</p>
       <p>pass: {{ pass }}</p>
@@ -28,7 +27,7 @@
     <v-row justify="center">
       <v-dialog v-model="dialog" max-width="290">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" dark v-bind="attrs" v-on="on">
+          <v-btn color="primary" v-bind="attrs" v-on="on">
             Open Map
           </v-btn>
         </template>

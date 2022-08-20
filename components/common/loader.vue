@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="loading" hide-overlay persistent width="300">
-    <v-card color="primary" dark>
+    <v-card color="primary">
       <v-card-text>
         Please stand by
         <v-progress-linear

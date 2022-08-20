@@ -4,7 +4,6 @@
       v-model="tab"
       background-color="primary darken-1"
       centered
-      dark
       icons-and-text
     >
       <v-tabs-slider></v-tabs-slider>
