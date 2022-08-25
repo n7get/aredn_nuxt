@@ -1,8 +1,20 @@
 <template>
   <v-card outlined height="100%">
-    <v-card-title @click="toggleContent" class="primary">
+    <v-card-title class="primary">
       <v-row>
-        <v-col cols="10" class="white--text">System</v-col>
+        <v-col cols="10" class="white--text">
+          <v-icon
+            v-if="showContent"
+            @click.stop="toggleContent"
+            class="white--text mb-1"
+          >
+            mdi-arrow-down-drop-circle
+          </v-icon>
+          <v-icon v-else @click.stop="toggleContent" class="white--text mb-1">
+            mdi-arrow-up-drop-circle
+          </v-icon>
+          System</v-col
+        >
         <v-col cols="2" align="right">
           <v-icon @click.stop="openSettings" class="white--text">
             mdi-cog
