@@ -91,6 +91,8 @@ const resourceList = {
 const initNodeData = () => {
   const newNodeData = {}
 
+  newNodeData.seenAlerts = {}
+
   Object.entries(resourceList).forEach(([k, v]) => {
     const data = {}
 
@@ -103,6 +105,9 @@ const initNodeData = () => {
 
   return newNodeData
 }
+
+export const devTools = true
+export const strict = true
 
 export const state = () => ({
   authenticated: false,
@@ -163,6 +168,10 @@ export const getters = {
   },
   legacyUrl: () => (node) => {
     return scheme + node + nodeDomainName + nodePort + '/cgi-bin/status'
+  },
+
+  seenAlerts(state) {
+    return state.nodeData.seenAlerts
   },
 
   alerts(state) {
@@ -365,7 +374,14 @@ export const actions = {
       commit('SET_ERROR', error)
     })
     return result
-  }
+  },
+
+  clearSeenAlerts({ commit }) {
+    commit('SET_SEEN_ALERTS', {})
+  },
+  setSeenAlert({ commit }, value) {
+    commit('SET_SEEN_ALERTS', value)
+  },
 }
 
 export const mutations = {
@@ -416,5 +432,9 @@ export const mutations = {
   },
   SET_PAGE_RESOURCES(state, resources) {
     state.pageResources = resources
+  },
+
+  SET_SEEN_ALERTS(state, value) {
+    state.nodeData.seenAlerts = value
   },
 }

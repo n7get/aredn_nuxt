@@ -4,6 +4,8 @@
 
     <v-main>
       <v-container>
+        <common-alert type="aredn" title="AREDN" />
+        <common-alert type="local" title="Local" />
         <nuxt />
       </v-container>
     </v-main>

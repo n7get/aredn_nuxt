@@ -4,10 +4,11 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-app-bar-title v-text="nodeName" />
       <v-spacer />
-      <v-col cols="2" align="right">
-        <v-btn small plain @click="emitRefresh">
-          <v-icon>mdi-refresh</v-icon>
-        </v-btn>
+      <v-col cols="4" sm="2" align="right">
+        <v-icon v-show="hasSeenAlerts" @click="clearSeenAlerts" class="mr-2">
+          mdi-alert-circle
+        </v-icon>
+        <v-icon @click="emitRefresh">mdi-refresh</v-icon>
       </v-col>
       <!-- <template v-slot:extension>
         <div class="hidden-xs-only">
@@ -156,7 +157,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data() {
@@ -167,12 +168,16 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['clearSeenAlerts']),
     emitRefresh() {
       $nuxt.$emit('refresh-node')
     },
   },
   computed: {
-    ...mapGetters(['nodeName']),
+    ...mapGetters(['seenAlerts', 'nodeName']),
+    hasSeenAlerts() {
+      return !!this.seenAlerts.aredn || !!this.seenAlerts.local
+    },
   },
 }
 </script>
