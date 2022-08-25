@@ -136,7 +136,8 @@ export default {
     }
   },
   methods: {
-    toggleContent() {
+    toggleContent(e) {
+      e.target.blur()
       this.showContent = !this.showContent
     },
     openSettings() {

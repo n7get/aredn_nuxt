@@ -1,33 +1,51 @@
 <template>
   <v-card outlined height="100%">
-    <v-card-title class="primary white--text">Memory</v-card-title>
-
-    <v-card-text class="pt-3">
+    <v-card-title class="primary">
       <v-row>
-        <v-col cols="6">
-          <span class="font-weight-bold">Total RAM:</span>
+        <v-col cols="12" class="white--text">
+          <v-icon
+            v-if="showContent"
+            @click.stop="toggleContent"
+            class="white--text mb-1"
+          >
+            mdi-arrow-down-drop-circle
+          </v-icon>
+          <v-icon v-else @click.stop="toggleContent" class="white--text mb-1">
+            mdi-arrow-up-drop-circle
+          </v-icon>
+          Memory
         </v-col>
-        <v-col cols="6"> {{ memory.totalram }} KB </v-col>
-
-        <v-col cols="6">
-          <span class="font-weight-bold">Free RAM:</span>
-        </v-col>
-        <v-col cols="6">
-          {{ memory.freeram }} KB
-          <v-progress-linear v-model="freerampctfree" />
-        </v-col>
-
-        <v-col cols="6">
-          <span class="font-weight-bold">Shared RAM:</span>
-        </v-col>
-        <v-col cols="6"> {{ memory.sharedram }} KB </v-col>
-
-        <v-col cols="6">
-          <span class="font-weight-bold">Buffer RAM:</span>
-        </v-col>
-        <v-col cols="6"> {{ memory.bufferram }} KB </v-col>
       </v-row>
-    </v-card-text>
+    </v-card-title>
+
+    <v-slide-y-transition>
+      <v-card-text v-show="showContent" class="pt-3">
+        <v-row>
+          <v-col cols="6">
+            <span class="font-weight-bold">Total RAM:</span>
+          </v-col>
+          <v-col cols="6"> {{ memory.totalram }} KB </v-col>
+
+          <v-col cols="6">
+            <span class="font-weight-bold">Free RAM:</span>
+          </v-col>
+          <v-col cols="6">
+            {{ memory.freeram }} KB
+            <v-progress-linear v-model="freerampctfree" />
+          </v-col>
+
+          <v-col cols="6">
+            <span class="font-weight-bold">Shared RAM:</span>
+          </v-col>
+          <v-col cols="6"> {{ memory.sharedram }} KB </v-col>
+
+          <v-col cols="6">
+            <span class="font-weight-bold">Buffer RAM:</span>
+          </v-col>
+          <v-col cols="6"> {{ memory.bufferram }} KB </v-col>
+        </v-row>
+      </v-card-text>
+    </v-slide-y-transition>
   </v-card>
 </template>
 
@@ -36,6 +54,17 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'FilesystemInfo',
+  data() {
+    return {
+      showContent: true,
+    }
+  },
+  methods: {
+    toggleContent(e) {
+      e.target.blur()
+      this.showContent = !this.showContent
+    },
+  },
   computed: {
     ...mapGetters(['memory']),
     freerampctfree() {
